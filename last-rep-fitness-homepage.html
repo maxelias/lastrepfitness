@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Last Rep Fitness — Homepage Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --coral: #fe7878;
+    --coral-deep: #e35f5f;
+    --coral-tint: #fff0ee;
+    --ink: #262322;
+    --ink-soft: #4a4644;
+    --grey: #726d6a;
+    --grey-light: #a49f9c;
+    --sand: #f5efe8;
+    --sand-deep: #ece2d6;
+    --paper: #fffefd;
+    --line: #e8e1da;
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 6px 18px -10px rgba(38,35,34,0.16);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--grey);
+    background:var(--paper);
+    font-size:16px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  svg{display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{
+    font-family:'Bricolage Grotesque', sans-serif;
+    color:var(--ink);
+    font-weight:700;
+    line-height:1.1;
+    letter-spacing:-0.01em;
+  }
+  .container{ max-width:1160px; margin:0 auto; padding:0 28px; }
+  section{ padding:84px 0; }
+  @media(max-width:720px){ section{ padding:52px 0; } }
+  .eyebrow{
+    font-size:13px; font-weight:600; color:var(--coral-deep);
+    letter-spacing:0.02em; margin-bottom:14px; display:block;
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:15px 27px; border-radius:8px;
+    font-weight:600; font-size:14.5px; letter-spacing:0.01em;
+    cursor:pointer; border:1.5px solid transparent;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--coral); color:#fff; }
+  .btn-primary:hover{ background:var(--coral-deep); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-ghost:hover{ border-color:var(--ink); }
+  .btn-block{ width:100%; justify-content:center; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,254,253,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .logo{
+    font-family:'Bricolage Grotesque', sans-serif; font-weight:800; font-size:19px;
+    color:var(--ink); letter-spacing:-0.01em; display:flex; align-items:center; gap:9px;
+  }
+  .logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--coral); }
+  .nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--coral-deep); }
+  .nav-cta{ display:flex; align-items:center; gap:20px; }
+  .cart-icon{ display:flex; align-items:center; }
+  @media(max-width:860px){ .nav-links{ display:none; } .nav-cta .btn-ghost{ display:none; } }
+
+  /* ---------- PHOTO PLACEHOLDER PANELS ---------- */
+  .photo-panel{
+    position:relative;
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    background: linear-gradient(150deg, #322d2b 0%, #4d3d38 42%, #c8615a 100%);
+  }
+  .photo-panel::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+    opacity:0.5;
+  }
+  .photo-panel .caption{
+    position:absolute; left:16px; bottom:16px;
+    display:inline-flex; align-items:center; gap:7px;
+    background:rgba(28,26,25,0.55);
+    backdrop-filter:blur(6px);
+    color:#fbf4f0; font-size:12px; font-weight:500;
+    padding:7px 12px 7px 10px; border-radius:100px;
+    z-index:2;
+  }
+  .photo-panel.tone-b{ background:linear-gradient(150deg, #3a3532 0%, #5a4640 45%, #fe9d9d 100%); }
+  .photo-panel.tone-c{ background:linear-gradient(160deg, #26221f 0%, #6b3d38 50%, #fe7878 100%); }
+  .photo-panel.tone-d{ background:linear-gradient(140deg, #2f2b29 0%, #715048 45%, #f0a596 100%); }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:64px 0 88px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; }
+  @media(max-width:940px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
+
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 54px);
+    text-transform:uppercase;
+    letter-spacing:-0.015em;
+    margin-bottom:22px;
+  }
+  .hero p.lead{ font-size:16.5px; color:var(--ink-soft); max-width:500px; margin-bottom:30px; }
+
+  .principles{ margin-bottom:34px; }
+  .principle{
+    display:flex; align-items:flex-start; gap:14px;
+    padding:14px 0; border-top:1px solid var(--line);
+  }
+  .principle:last-child{ border-bottom:1px solid var(--line); }
+  .principle svg{ flex-shrink:0; margin-top:2px; }
+  .principle strong{ color:var(--ink); font-weight:600; font-size:14.8px; }
+  .principle span{ display:block; font-size:13.6px; color:var(--grey); margin-top:2px; }
+
+  .hero-close{ font-size:15px; font-weight:600; color:var(--ink); margin-bottom:20px; }
+
+  .hero-photo{ aspect-ratio:4/5; }
+  @media(max-width:940px){ .hero-photo{ aspect-ratio:16/10; } }
+
+  /* ---------- CLASSES ---------- */
+  .section-head{ max-width:560px; margin-bottom:44px; }
+  .section-head h2{ font-size:clamp(26px,3vw,34px); margin-bottom:10px; }
+  .section-head p{ font-size:15.5px; }
+
+  .class-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; }
+  @media(max-width:980px){ .class-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media(max-width:560px){ .class-grid{ grid-template-columns:1fr; } }
+
+  .class-card .photo-panel{ aspect-ratio:4/3; margin-bottom:16px; }
+  .class-card h4{ font-size:16px; margin-bottom:6px; }
+  .class-card p{ font-size:13.6px; }
+
+  /* ---------- BOOK A FREE CLASS ---------- */
+  .book{ background:var(--sand); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .book-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  @media(max-width:900px){ .book-grid{ grid-template-columns:1fr; gap:36px; } }
+  .book h2{ font-size:clamp(26px,3vw,32px); margin-bottom:12px; }
+  .book p.note{ font-size:15px; margin-bottom:0; }
+
+  .book-form{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius-md); padding:30px; box-shadow:var(--shadow-sm);
+  }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12.5px; font-weight:600; color:var(--ink-soft); margin-bottom:6px; }
+  .field input{
+    width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:8px;
+    font-family:'Inter',sans-serif; font-size:14.5px; color:var(--ink); background:var(--paper);
+  }
+  .field input:focus{ outline:none; border-color:var(--coral); }
+  .form-fine{ font-size:12px; color:var(--grey-light); margin-top:14px; text-align:center; }
+
+  /* ---------- LOCATIONS ---------- */
+  .loc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media(max-width:760px){ .loc-grid{ grid-template-columns:1fr; } }
+  .loc-card{
+    border:1px solid var(--line); border-radius:var(--radius-md);
+    overflow:hidden; box-shadow:var(--shadow-sm);
+  }
+  .loc-map{ aspect-ratio:16/8; position:relative; background:var(--sand); }
+  .loc-map svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .loc-body{ padding:22px 24px 26px; }
+  .loc-body h4{ font-size:16.5px; margin-bottom:6px; }
+  .loc-body p{ font-size:13.8px; margin-bottom:14px; }
+  .loc-directions{
+    font-size:13.5px; font-weight:700; color:var(--coral-deep);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq{ background:var(--sand); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .faq-list{ max-width:760px; margin:0 auto; }
+  details{
+    border-bottom:1px solid var(--sand-deep);
+    padding:20px 0;
+  }
+  details:first-child{ border-top:1px solid var(--sand-deep); }
+  summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between;
+    font-family:'Bricolage Grotesque', sans-serif; font-weight:600; font-size:16px; color:var(--ink);
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary .plus{ font-size:20px; color:var(--coral); font-weight:400; transition:transform .15s ease; }
+  details[open] summary .plus{ transform:rotate(45deg); }
+  details p{ margin-top:12px; font-size:14.5px; max-width:640px; }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-footer{ padding:52px 0 36px; }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;
+    padding-bottom:30px; margin-bottom:26px; border-bottom:1px solid var(--line);
+  }
+  .footer-links{ display:flex; gap:28px; font-size:13.8px; color:var(--grey); flex-wrap:wrap; }
+  .footer-links a:hover{ color:var(--ink); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-size:12.8px; color:var(--grey-light);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1c1a19; --ink:#f5f1ee; --ink-soft:#d8d2ce; --grey:#b3aca8;
+      --grey-light:#867f7b; --sand:#242020; --sand-deep:#2f2a28; --line:#332e2c;
+    }
+    body{ background:var(--paper); }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1c1a19; --ink:#f5f1ee; --ink-soft:#d8d2ce; --grey:#b3aca8;
+    --grey-light:#867f7b; --sand:#242020; --sand-deep:#2f2a28; --line:#332e2c;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-row">
+    <a href="#" class="logo"><span class="dot"></span>LAST&nbsp;REP</a>
+    <nav class="nav-links">
+      <a href="#classes">Classes</a>
+      <a href="#book">Book a free class</a>
+      <a href="#locations">Locations</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="cart-icon" aria-label="Cart">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18h7.3a2 2 0 0 0 1.96-1.6L20 7H6" stroke="#262322" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="#262322"/><circle cx="18" cy="21" r="1.4" fill="#262322"/></svg>
+      </span>
+      <a href="#book" class="btn btn-primary">Claim your free 10-day pass</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Small-group training · Matraville</span>
+      <h1>We're more than<br>just a gym</h1>
+      <p class="lead">A place where people of every age and fitness level train with purpose, build real strength, improve confidence and feel genuinely supported along the way.</p>
+
+      <div class="principles">
+        <div class="principle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2 L21 6 V12 C21 17.5 17 21.7 12 23 C7 21.7 3 17.5 3 12 V6 Z" stroke="#fe7878" stroke-width="2"/><path d="M8 12 L11 15 L16 9" stroke="#262322" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Safe, high-quality coaching</strong><span>Every session is led by a qualified coach watching your form.</span></div>
+        </div>
+        <div class="principle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 20 V6 M12 20 V3 M20 20 V10" stroke="#262322" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Strength as the foundation of life</strong><span>Training that supports everything you do outside the gym.</span></div>
+        </div>
+        <div class="principle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fe7878" stroke-width="2"/><path d="M12 7 V12 L15.5 14" stroke="#262322" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Fitness for everyday function</strong><span>Built for real life — lifting, carrying, keeping up.</span></div>
+        </div>
+        <div class="principle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="#262322" stroke-width="2"/><path d="M3 9 H21" stroke="#262322" stroke-width="2"/><circle cx="8" cy="14" r="1.6" fill="#fe7878"/></svg>
+          <div><strong>Long-term consistency over quick fixes</strong><span>Small, repeatable wins beat any short-term challenge.</span></div>
+        </div>
+        <div class="principle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="3.4" stroke="#262322" stroke-width="2"/><circle cx="17" cy="10" r="2.8" stroke="#fe7878" stroke-width="2"/><path d="M3 20 C3 15.5 5.7 13 9 13 C12.3 13 15 15.5 15 20" stroke="#262322" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Community as the key to accountability</strong><span>People who notice — and back you — when you show up.</span></div>
+        </div>
+      </div>
+
+      <p class="hero-close">Come see why our members never look back.</p>
+      <a href="#book" class="btn btn-primary">Claim your free 10-day pass</a>
+    </div>
+
+    <div class="photo-panel hero-photo">
+      <span class="caption">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 8 H7 L9 5 H15 L17 8 H20 A1 1 0 0 1 21 9 V18 A1 1 0 0 1 20 19 H4 A1 1 0 0 1 3 18 V9 A1 1 0 0 1 4 8 Z" stroke="#fbf4f0" stroke-width="1.6"/><circle cx="12" cy="13.5" r="3.6" stroke="#fbf4f0" stroke-width="1.6"/></svg>
+        Group session, Heffron Park
+      </span>
+    </div>
+  </div>
+</section>
+
+<section id="classes">
+  <div class="container">
+    <div class="section-head">
+      <h2>Classes</h2>
+      <p>Small groups, real coaching, and a session type for wherever you're starting from.</p>
+    </div>
+    <div class="class-grid">
+      <div class="class-card">
+        <div class="photo-panel">
+          <span class="caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 8 H7 L9 5 H15 L17 8 H20 A1 1 0 0 1 21 9 V18 A1 1 0 0 1 20 19 H4 A1 1 0 0 1 3 18 V9 A1 1 0 0 1 4 8 Z" stroke="#fbf4f0" stroke-width="1.6"/><circle cx="12" cy="13.5" r="3.2" stroke="#fbf4f0" stroke-width="1.6"/></svg>Turf</span>
+        </div>
+        <h4>Outdoor turf sessions</h4>
+        <p>Strength and conditioning in the open air, capped small.</p>
+      </div>
+      <div class="class-card">
+        <div class="photo-panel tone-b">
+          <span class="caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 8 H7 L9 5 H15 L17 8 H20 A1 1 0 0 1 21 9 V18 A1 1 0 0 1 20 19 H4 A1 1 0 0 1 3 18 V9 A1 1 0 0 1 4 8 Z" stroke="#fbf4f0" stroke-width="1.6"/><circle cx="12" cy="13.5" r="3.2" stroke="#fbf4f0" stroke-width="1.6"/></svg>Undercover</span>
+        </div>
+        <h4>Undercover, all-weather</h4>
+        <p>Covered space, so training keeps going whatever the forecast.</p>
+      </div>
+      <div class="class-card">
+        <div class="photo-panel tone-c">
+          <span class="caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 8 H7 L9 5 H15 L17 8 H20 A1 1 0 0 1 21 9 V18 A1 1 0 0 1 20 19 H4 A1 1 0 0 1 3 18 V9 A1 1 0 0 1 4 8 Z" stroke="#fbf4f0" stroke-width="1.6"/><circle cx="12" cy="13.5" r="3.2" stroke="#fbf4f0" stroke-width="1.6"/></svg>Super Saturday</span>
+        </div>
+        <h4>Super Saturday</h4>
+        <p>Our biggest weekly session — up to 20 people, one big effort.</p>
+      </div>
+      <div class="class-card">
+        <div class="photo-panel tone-d">
+          <span class="caption"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 8 H7 L9 5 H15 L17 8 H20 A1 1 0 0 1 21 9 V18 A1 1 0 0 1 20 19 H4 A1 1 0 0 1 3 18 V9 A1 1 0 0 1 4 8 Z" stroke="#fbf4f0" stroke-width="1.6"/><circle cx="12" cy="13.5" r="3.2" stroke="#fbf4f0" stroke-width="1.6"/></svg>Mums &amp; bubs</span>
+        </div>
+        <h4>Mums, bubs &amp; babies welcome</h4>
+        <p>Pram-friendly sessions so getting back into it doesn't mean leaving anyone behind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <div class="container book-grid">
+    <div>
+      <span class="eyebrow">Free trial</span>
+      <h2>Book a free class</h2>
+      <p class="note">Pop your details in and we'll be in touch to lock in your free trial session — no obligation, just come and see what it's like to train with the crew. <br><span style="font-size:12.5px;color:var(--grey-light);">*T&amp;Cs apply.</span></p>
+    </div>
+    <div class="book-form">
+      <div class="field"><label>Full name</label><input type="text" placeholder="Jordan Smith"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="jordan@email.com"></div>
+      <div class="field"><label>Phone</label><input type="tel" placeholder="04XX XXX XXX"></div>
+      <button class="btn btn-primary btn-block">Request my free class</button>
+      <p class="form-fine">We'll reach out within 1 business day to book your trial.</p>
+    </div>
+  </div>
+</section>
+
+<section id="locations">
+  <div class="container">
+    <div class="section-head">
+      <h2>Locations</h2>
+      <p>Two spots in Matraville — pick whichever's easier to get to.</p>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-card">
+        <div class="loc-map">
+          <svg viewBox="0 0 400 160" preserveAspectRatio="none">
+            <rect width="400" height="160" fill="#ece2d6"/>
+            <path d="M0 40 H400 M0 90 H400 M60 0 V160 M220 0 V160 M330 0 V160" stroke="#ddceba" stroke-width="1.5"/>
+            <circle cx="200" cy="80" r="9" fill="#fe7878"/>
+            <circle cx="200" cy="80" r="16" fill="none" stroke="#fe7878" stroke-width="1.5" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="loc-body">
+          <h4>Heffron Park Tennis Centre</h4>
+          <p>439 Bunnerong Road, Matraville NSW 2036</p>
+          <a href="#" class="loc-directions">Get directions →</a>
+        </div>
+      </div>
+      <div class="loc-card">
+        <div class="loc-map">
+          <svg viewBox="0 0 400 160" preserveAspectRatio="none">
+            <rect width="400" height="160" fill="#ece2d6"/>
+            <path d="M0 55 H400 M0 105 H400 M100 0 V160 M260 0 V160" stroke="#ddceba" stroke-width="1.5"/>
+            <circle cx="210" cy="70" r="9" fill="#fe7878"/>
+            <circle cx="210" cy="70" r="16" fill="none" stroke="#fe7878" stroke-width="1.5" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="loc-body">
+          <h4>USANA Centre — Rabbitohs HQ</h4>
+          <p>Matraville NSW 2036</p>
+          <a href="#" class="loc-directions">Get directions →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;text-align:center;">
+      <h2>Frequently asked</h2>
+      <p style="margin:0 auto;">The practical stuff, answered upfront.</p>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary>How big are the classes?<span class="plus">+</span></summary>
+        <p>Capped at 12 people for regular sessions, and up to 20 for Super Saturday.</p>
+      </details>
+      <details>
+        <summary>I'm not that fit — will I keep up?<span class="plus">+</span></summary>
+        <p>Every session is scaled by our coaches, so it works whether you're brand new or years into training.</p>
+      </details>
+      <details>
+        <summary>What happens if it's raining?<span class="plus">+</span></summary>
+        <p>We've got undercover space at both locations, so wet weather doesn't cancel your session.</p>
+      </details>
+      <details>
+        <summary>Can I freeze my membership?<span class="plus">+</span></summary>
+        <p>Yes — freezes of 1 to 8 weeks are available for travel, injury or anything else life throws up.</p>
+      </details>
+      <details>
+        <summary>Is there a minimum commitment?<span class="plus">+</span></summary>
+        <p>Memberships run on a minimum 6-week term, with flexible session use across the week.</p>
+      </details>
+      <details>
+        <summary>Are babies and prams welcome?<span class="plus">+</span></summary>
+        <p>Absolutely — our mums &amp; bubs sessions are built specifically for training with your baby along.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-row">
+      <div>
+        <a href="#" class="logo"><span class="dot"></span>LAST&nbsp;REP</a>
+        <p style="margin-top:10px; font-size:13.8px; max-width:260px;">Small-group outdoor &amp; hybrid training in Matraville.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#classes">Classes</a>
+        <a href="#book">Book a free class</a>
+        <a href="#locations">Locations</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Last Rep Fitness. lastrepfitness.com.au</span>
+      <span>Matraville, NSW</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
